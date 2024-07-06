@@ -38,7 +38,7 @@ let cartList=[];
   
   // Render cart list
   function renderCart() {
-    cartList=JSON.parse(sessionStorage.getItem("cartList")) || [];
+    cartList=JSON.parse(sessionStorage.getItem("cart-data")) || [];
     cart.innerHTML=``
     cartList.forEach((e,index)=>{
     cart.innerHTML+=`<li>${e.name} $${e.price} <button class="add-to-cart-btn" onclick="removeFromCart(${index})">Remove</button></li>`
@@ -49,21 +49,21 @@ let cartList=[];
   function addToCart(e) {
     console.log("add",e,cartList);
     cartList.push(e);
-    sessionStorage.setItem("cartList",JSON.stringify(cartList))
+    sessionStorage.setItem("cart-data",JSON.stringify(cartList))
     renderCart()
   }
   
   // Remove item from cart
   function removeFromCart(index) {
     cartList.splice(index,1);
-    sessionStorage.setItem("cartList",JSON.stringify(cartList))
+    sessionStorage.setItem("cart-data",JSON.stringify(cartList))
     renderCart();
   }
   
   // Clear cart
   function clearCart() {
     cartList=[];
-    sessionStorage.removeItem("cartList")
+    sessionStorage.removeItem("cart-data")
     renderCart();
   }
   
