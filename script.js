@@ -6,7 +6,10 @@ cart=document.querySelector('#cart-list');
 clear=document.querySelector('#clear-cart-btn');
 clear.setAttribute("onclick",'clearCart()')
 
-      
+
+let cartList=[]; 
+
+
 const products = [
     { id: 1, name: "Product 1", price: 10 },
     { id: 2, name: "Product 2", price: 20 },
@@ -14,7 +17,6 @@ const products = [
     { id: 4, name: "Product 4", price: 40 },
     { id: 5, name: "Product 5", price: 50 },
   ];
-let cartList=[];  
   // DOM elements
   const productList = document.getElementById("product-list");
   function fun(productId){
@@ -25,8 +27,8 @@ let cartList=[];
                 return;
             }
             })
-  }
-  
+  } 
+
   // Render product list
   function renderProducts() {
     products.forEach((product) => {
@@ -52,9 +54,14 @@ let cartList=[];
     sessionStorage.setItem("cart-data",JSON.stringify(cartList))
     renderCart()
   }
+document.addEventListener("DOMContentLoaded",()=>{
   
-  // Remove item from cart
-  function removeFromCart(index) {
+  
+  // Initial render
+  renderProducts();
+  renderCart();
+})
+function removeFromCart(index) {
     cartList.splice(index,1);
     sessionStorage.setItem("cart-data",JSON.stringify(cartList))
     renderCart();
@@ -63,11 +70,7 @@ let cartList=[];
   // Clear cart
   function clearCart() {
     cartList=[];
-    sessionStorage.removeItem("cart-data")
+    sessionStorage.setItem("cart-data",'[]')
     renderCart();
   }
-  
-  // Initial render
-  renderProducts();
-  renderCart();
   
